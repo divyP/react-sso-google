@@ -18,22 +18,19 @@ export const searchDataFromWiki = (search) => {
   const params = {
     action: "query",
     list: "search",
-    srsearch: "Nelson Mandela",
+    srsearch: search,
     format: "json",
+    srlimit: 50,
   };
 
   wikiUrl = wikiUrl + "?origin=*";
-  Object.keys(params).forEach(function (key) {
+  Object.keys(params).forEach((key) => {
     wikiUrl += "&" + key + "=" + params[key];
   });
 
-  axios({ method: "GET", url: wikiUrl })
+  return axios({ method: "GET", url: wikiUrl })
     .then((response) => {
-      if (response?.data?.query?.search[0]?.title === "Nelson Mandela") {
-        console.log(
-          "Your search page 'Nelson Mandela' exists on English Wikipedia"
-        );
-      }
+      return response.data;
     })
     .catch(function (error) {
       console.log(error);

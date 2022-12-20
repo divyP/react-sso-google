@@ -1,3 +1,6 @@
 .dashboard {
   text-align: center;
 }
+.flex {
+  display: flex;
+}
